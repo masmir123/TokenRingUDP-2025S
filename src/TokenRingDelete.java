@@ -71,8 +71,6 @@ public class TokenRingDelete {
             for (Token.Endpoint endpoint : rc.getRing()) {
                 rccopy.append(new Token.Endpoint(endpoint.ip(), endpoint.port()));
             }
-        }else{
-            rccopy = null;
         }
 
         try {

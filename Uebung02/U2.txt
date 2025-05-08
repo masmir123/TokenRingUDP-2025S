@@ -129,7 +129,7 @@ Jeder Knoten setzt einen receive-Timeout dynamisch mit der Anzahl der Knoten im 
 jeden Knoten +1,5 sec.
 Wenn ein Knoten entfernt wird, werden die übrig gebliebenen Knoten einen Timeout feststellen und einen Ping an den
 nächsten Knoten schicken, welcher mit Pong bestätigt werden muss, wenn dies nicht geschieht wird dieser Knoten gelöscht
-und an den nächsten gesendet.
+und der Token wird an den nächsten folgenden Knoten gesendet.
 Das Token.receive() wurde so angepasst, dass es einen Ping empfangen kann und auf diesen mit Pong antwortet. Im Loop wird
 falls ein Ping im TokenRingDelete.receive() empfangen wird, dieses rekursiv erneut aufgerufen, damit wieder auf
 das nächste Token gewartet wird. Erst wenn wirklich ein Token empfangen wird, wird der Loop weitergeführt.
