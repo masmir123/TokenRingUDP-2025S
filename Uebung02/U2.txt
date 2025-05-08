@@ -37,7 +37,8 @@ Routenverfolgung zu anu.edu.au [130.56.67.33]
  10     *        *        *     Zeitüberschreitung der Anforderung.
 
 Der Befehl sendet drei Pakete an die Zieladresse und wartet auf eine Antwort. Die ms-Angaben sind die
-Rückmeldungen/Antwortzeiten zu diesen Paketen an den einzelnen Stationen. Jede Station erhöht die Anzahl der Hops um 1.
+Rückmeldungen/Antwortzeiten zu diesen Paketen an den einzelnen Stationen. Jede Station erhöht die Anzahl der Hops um 1,
+indem in den Paketen die TTL um 1 verringert wird. (Jeder Paket startet im Beispiel oben mit einer TTL von 30)
 Die ersten drei Hops gehören zum lokalen Netzwerk bzw. zum ISP-Netzwerk (laut ChatGPT).
 Hop 5 ist das Gateway des ISPs, also des Internetanbieters.
 Ab Hop 8 befinden sich die Pakete in einem globalen Backbone-Netzwerk in Frankfurt (erkennbar an „ffm“),
@@ -91,7 +92,7 @@ Verbindung auf mit dem Server, also bekommt eine Rückmeldung -> 3-way handshake
 Bei geschlossenen Ports wird ein Reset-Paket zurückgeschickt, bei offenen Ports wird ein SYN-ACK-Paket zurückgeschickt.
 (laut ChatGPT)
 Das heißt der TCP Scan ist schneller, weil er immer eine Rückmeldung bekommt. UDP-Scans hingegen bekommen keine
-Rückmeldung, wenn der Port offen ist, dann kommt nichts zurück, wenn der Port geschlossen ist, dann kommt ein
+Rückmeldung, wenn der Port offen ist kommt nichts zurück. Wenn der Port geschlossen ist, dann kommt ein
 ICMP Port Unreachable zurück. (laut ChatGPT)
 Beim Scan muss also gewartet werden ob eine Rückmeldung überhaupt kommt.
 
@@ -162,6 +163,6 @@ Hier sieht man dass der erste Knoten einen Ping an den zweiten Knoten geschickt 
 Bei dem ersten Knoten wird der receive-Timeout zurückgesetzt, weil der Knoten noch lebt. Dieser wird warten bis ein neuer
 Token kommt. Der zweite Knoten hat den Timeout noch nicht erkannt, und wird angepingt und bestätigt mit Pong den ersten
 Knoten das er noch lebt. (Received Pong. Return to receive.) Der zweite Knoten schickt dann einen Ping an den dritten
-Knoten, der antwortet aber nicht.
-Der zweite Knoten wird dann den dritten Knoten als tot markieren und den Token an den ersten Knoten schicken, damit
-der Ring weiter arbeiten kann.
+Knoten, der antwortet nicht, da er entfernt wurde.
+Der zweite Knoten markiert den dritten Knoten als tot und schickt den Token an den ersten Knoten, damit der Ring weiter
+arbeiten kann.
